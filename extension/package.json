@@ -1,0 +1,99 @@
+{
+  "name": "auto-close-sidebar",
+  "displayName": "Phoca Auto Close Sidebar",
+  "description": "Automatically closes the sidebar whenever you work in the editor: opening a file (single or double click), switching to an open file, closing a tab or clicking into the text.",
+  "version": "2.0.0",
+  "publisher": "phoca",
+  "author": {
+    "name": "Jan Pavelka (Phoca)",
+    "url": "https://github.com/PhocaCz/PhocaCodeAutoCloseSidebar"
+  },
+  "license": "GPL-2.0-only",
+  "homepage": "https://github.com/PhocaCz/PhocaCodeAutoCloseSidebar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhocaCz/PhocaCodeAutoCloseSidebar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PhocaCz/PhocaCodeAutoCloseSidebar/issues"
+  },
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1f2a37",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "sidebar",
+    "explorer",
+    "auto close",
+    "focus",
+    "close sidebar",
+    "editor",
+    "layout",
+    "phoca"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Phoca Auto Close Sidebar",
+      "properties": {
+        "autoCloseSidebar.onSingleClickOpen": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Close the sidebar when a file opens in a **preview tab** (italic tab title). That is what a **single click** on a file in the Explorer does. Off by default, because the sidebar would close before you can double-click; if you turn it on, set `#autoCloseSidebar.delay#` to give the second click time to arrive. If you changed `workbench.list.openMode` to `doubleClick`, a double click is what opens the preview.",
+          "order": 1
+        },
+        "autoCloseSidebar.onDoubleClickOpen": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Close the sidebar when a file becomes a **permanent tab** (normal, non-italic title). That is what a **double click** on a file in the Explorer does. It also applies to files that open directly as permanent tabs, for example when `workbench.editor.enablePreview` is off.",
+          "order": 2
+        },
+        "autoCloseSidebar.onSwitchToOpenFile": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Close the sidebar when the editor switches to a file that is **already open** in another tab (for example when you click it in the Explorer). VS Code cannot tell a single click from a double click here, so both close the sidebar. It also fires when you switch tabs in any other way, and when closing the active tab makes VS Code switch to the next one.",
+          "order": 3
+        },
+        "autoCloseSidebar.delay": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 5000,
+          "markdownDescription": "Delay in **milliseconds** before the sidebar closes after `#autoCloseSidebar.onSingleClickOpen#` or `#autoCloseSidebar.onSwitchToOpenFile#` fires. Only needed if you want a single click to close the sidebar but still be able to double-click (try `400`). `0` closes immediately. Other triggers always close immediately.",
+          "order": 4
+        },
+        "autoCloseSidebar.onCloseTab": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Close the sidebar when you **close a tab**.",
+          "order": 5
+        },
+        "autoCloseSidebar.onEditorClick": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Close the sidebar when you **click with the mouse inside the text editor**. This is the way to close it after clicking the file that is already active in the Explorer, because VS Code does not report that click.",
+          "order": 6
+        },
+        "autoCloseSidebar.debug": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Write every event and every sidebar close, with its reason, to the **Output** panel (channel *Auto Close Sidebar*). Useful for finding out which trigger closed the sidebar.",
+          "order": 7
+        }
+      }
+    }
+  }
+}
